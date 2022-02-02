@@ -32,6 +32,11 @@ export const Header = (props) => {
 
   useSetNetworkSettings(TEST_NET_ID, "0");
   useEffect(() => {
+    // Preload the images
+    shuffledIndexes.forEach((preloadIndex) => {
+      const img = new Image();
+      img.src = `/img/${shuffledIndexes[preloadIndex]}.png`;
+    });
     let index = 0;
     setInterval(function () {
       index = (index + 1) % shuffledIndexes.length;
