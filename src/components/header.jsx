@@ -38,7 +38,7 @@ export const Header = (props) => {
     setInterval(function () {
       index = (index + 1) % shuffledIndexes.length;
       setImageIndex(index);
-    }, 3000);
+    }, 4000);
   }, [setImageIndex]);
 
   // const c = document.getElementById("myCanvas");
