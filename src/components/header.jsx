@@ -8,12 +8,15 @@ import shuffleSeed from "shuffle-seed";
 import Pact from "pact-lang-api";
 
 const IMAGE_SCALE = 10;
+const TOTAL_IMAGES = 33;
+const indexes = Array.from({ length: TOTAL_IMAGES }, (_, i) => i + 1);
+const shuffledIndexes = shuffleSeed.shuffle(indexes, Math.random());
 
-const shuffledKitties = shuffleSeed.shuffle(kitties, Math.random());
+// const shuffledKitties = shuffleSeed.shuffle(kitties, Math.random());
 
 export const Header = (props) => {
-  const [image2dArr, setImage2dArr] = useState([[]]);
-
+  // const [image2dArr, setImage2dArr] = useState([[]]);
+  const [imgIndex, setImageIndex] = useState(0);
   const isSmallScreen = useWindowSize() <= 600;
   const screenStyleToAdd = isSmallScreen ? smallScreenStyle : {};
   const screenStyle = { ...style, ...screenStyleToAdd };
@@ -30,65 +33,60 @@ export const Header = (props) => {
   } = useContext(PactContext);
 
   useSetNetworkSettings(TEST_NET_ID, "0");
-
   useEffect(() => {
-    // getImage2DArray((data) => {
-    //   setImage2dArr(data.imageArr);
-    // });
-    setImage2dArr(shuffledKitties[0]);
-    let index = 1;
+    let index = 0;
     setInterval(function () {
-      if (index >= shuffledKitties.length) {
-        index = 0;
-      }
-      setImage2dArr(shuffledKitties[index]);
-      index++;
-    }, 5000);
-  }, []);
+      index = (index + 1) % shuffledIndexes.length;
+      setImageIndex(index);
+    }, 3000);
+  }, [setImageIndex]);
 
-  const c = document.getElementById("myCanvas");
-  const showCanvas = image2dArr.length > 0 && image2dArr[0].length > 0;
+  // const c = document.getElementById("myCanvas");
+  // const showCanvas = image2dArr.length > 0 && image2dArr[0].length > 0;
 
-  useEffect(() => {
-    if (c != null && showCanvas) {
-      var ctx = c.getContext("2d");
-      ctx.clearRect(
-        0,
-        0,
-        image2dArr[0].length * IMAGE_SCALE,
-        image2dArr.length * IMAGE_SCALE
-      );
-      for (var i = 0; i < image2dArr.length; i++) {
-        for (var j = 0; j < image2dArr[0].length; j++) {
-          const r = image2dArr[i][j]["r"];
-          const g = image2dArr[i][j]["g"];
-          const b = image2dArr[i][j]["b"];
-          const a = image2dArr[i][j]["a"];
-          ctx.fillStyle = "rgba(" + r + "," + g + "," + b + ", " + a + ")";
-          ctx.fillRect(
-            j * IMAGE_SCALE,
-            i * IMAGE_SCALE,
-            IMAGE_SCALE,
-            IMAGE_SCALE
-          );
-        }
-      }
-    }
-  }, [image2dArr, c, showCanvas]);
+  // useEffect(() => {
+  //   if (c != null && showCanvas) {
+  //     var ctx = c.getContext("2d");
+  //     ctx.clearRect(
+  //       0,
+  //       0,
+  //       image2dArr[0].length * IMAGE_SCALE,
+  //       image2dArr.length * IMAGE_SCALE
+  //     );
+  //     for (var i = 0; i < image2dArr.length; i++) {
+  //       for (var j = 0; j < image2dArr[0].length; j++) {
+  //         const r = image2dArr[i][j]["r"];
+  //         const g = image2dArr[i][j]["g"];
+  //         const b = image2dArr[i][j]["b"];
+  //         const a = image2dArr[i][j]["a"];
+  //         ctx.fillStyle = "rgba(" + r + "," + g + "," + b + ", " + a + ")";
+  //         ctx.fillRect(
+  //           j * IMAGE_SCALE,
+  //           i * IMAGE_SCALE,
+  //           IMAGE_SCALE,
+  //           IMAGE_SCALE
+  //         );
+  //       }
+  //     }
+  //     console.log(c.toDataURL());
+  //   }
+  // }, [image2dArr, c, showCanvas]);
   const splitStyleToAddTxt = isSmallScreen ? smallTextStyle : normalTextStyle;
   const splitStyleText = { ...splitContainerStyle, ...splitStyleToAddTxt };
-  const imageWidth = 38 * IMAGE_SCALE;
-  const imageHeight = 32 * IMAGE_SCALE;
+  // const imageWidth = 38 * IMAGE_SCALE;
+  // const imageHeight = 32 * IMAGE_SCALE;
+  const imgSrc = `/img/${shuffledIndexes[imgIndex]}.png`;
   return (
     <header id="header">
       <div className="intro" style={screenStyle}>
         <div style={splitStyleImg}>
-          <canvas
+          <img src={imgSrc} key={imgSrc} style={{ height: 320 }} />
+          {/* <canvas
             style={{ all: "initial" }}
             id="myCanvas"
             width={imageWidth}
             height={imageHeight}
-          ></canvas>
+          ></canvas> */}
         </div>
         <div style={splitStyleText}>
           <div className="">
@@ -243,7 +241,7 @@ const smallImageStyle = {
   width: "100%",
   paddingTop: "70px",
   paddingBottom: "0px",
-  overflow: "none",
+  overflow: "hidden",
 };
 
 const smallTextStyle = {
