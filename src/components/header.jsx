@@ -1,8 +1,6 @@
-import banner from "./../banner.png";
 import { useEffect, useContext, useState } from "react";
 import useWindowSize from "./../hooks/useWindowSize";
 import { PactContext, TEST_NET_ID } from "../wallet/pact-wallet";
-import kitties from "./kitties";
 import shuffleSeed from "shuffle-seed";
 
 import Pact from "pact-lang-api";
