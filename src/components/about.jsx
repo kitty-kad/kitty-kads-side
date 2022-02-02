@@ -24,7 +24,11 @@ export const About = (props) => {
               <br />
               {props.data ? props.data.paragraph2 : "loading..."}
               <br />
-              You can read their full origin story here
+              You can read their origin story{" "}
+              <a href="https://medium.com/@kitty.kad.token/kitty-kads-nfts-and-game-c962c8fad768">
+                {" "}
+                here
+              </a>
               <br />
               <br />
               {props.data ? props.data.paragraph3 : "loading..."}
