@@ -38,22 +38,22 @@
     ],
     "Roadmap": [
         {
-            "icon": "fa fa-diamond",
+            "icon": "fa fa-legal",
             "title": "Gen 0 Mint - Q1",
             "text": "First mints start. Gen 0 kitties can be used to create future generations"
         },
         {
-            "icon": "fa fa-rocket",
+            "icon": "fa fa-home",
             "title": "Breeding & Trading - Q1",
             "text": "Breeding of kitties will be enabled to allow users to mix and match kitties"
         },
         {
-            "icon": "fa fa-gamepad",
+            "icon": "fa fa-chain",
             "title": "Defi Integration - Q2",
             "text": "Use Gen0 kitties for exclusive defi perks in upcoming dapps"
         },
         {
-            "icon": "fa fa-chain",
+            "icon": "fa fa-gamepad",
             "title": "Kitty Kad Games - Q3",
             "text": "New gaming world powered by Kitty Kad tokens and NFTs"
         }
@@ -114,7 +114,7 @@
             "text": "Use your NFTs as characters inside games"
         },
         {
-            "icon": "fa fa-gamepad",
+            "icon": "fa fa-sitemap",
             "title": "Defi Dapps",
             "text": "The Kitty Kad defi ecosystem, powered by cats and love"
         }
