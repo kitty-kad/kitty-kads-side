@@ -1,6 +1,10 @@
 import banner from "./../banner.png";
-
+import useWindowSize from "../hooks/useWindowSize";
 export const About = (props) => {
+  const isSmallScreen = useWindowSize() <= 600;
+  const rowStyle = isSmallScreen ? rowStyleSmallScreen : rowStyleBase;
+  const imgStyle = isSmallScreen ? imgStyleSmall : imgStyleBase;
+
   return (
     <div id="about" className="text-center">
       <div className="container">
@@ -48,18 +52,28 @@ export const About = (props) => {
   );
 };
 
-const rowStyle = {
+const rowStyleBase = {
   display: "flex",
-  width: "100%",
+  // width: "100%",
   alignItems: "center",
   justifyContent: "center",
 };
 
-const imgStyle = {
-  height: 250,
+const rowStyleSmallScreen = {
+  ...rowStyleBase,
+  flexDirection: "column",
+};
+
+const imgStyleBase = {
+  maxHeight: 250,
   marginTop: 0,
   width: "auto",
   marginLeft: "auto",
   marginRight: "auto",
   display: "block",
+};
+
+const imgStyleSmall = {
+  ...imgStyleBase,
+  marginTop: 25,
 };

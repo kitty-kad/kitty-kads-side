@@ -247,6 +247,12 @@ header .intro-text {
   padding: 70px 0;
   background: #f6f6f6;
 }
+
+@media screen and (max-width: 600px) {
+  #roadmap {
+    padding: 40px 0;
+  }
+}
 #roadmap i.fa,
 #projects i.fa {
   font-size: 38px;
@@ -264,9 +270,9 @@ header .intro-text {
 #about {
   padding: 80px 0;
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 600px) {
   #about {
-    padding: 30 0;
+    padding: 50px 0 0 0;
   }
 }
 #about h3 {
@@ -317,6 +323,13 @@ header .intro-text {
   background: linear-gradient(to right, #58b2ee 0%, #58b2ee 100%);
   color: #fff;
 }
+
+@media screen and (max-width: 600px) {
+  #highlights {
+    padding: 40px 0;
+  }
+}
+
 #highlights .service-desc {
   margin: 10px 10px 20px;
 }

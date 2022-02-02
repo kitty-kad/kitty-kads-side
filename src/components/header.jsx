@@ -1,5 +1,6 @@
 import banner from "./../banner.png";
-import { useEffect, useContext, useLayoutEffect, useState } from "react";
+import { useEffect, useContext, useState } from "react";
+import useWindowSize from "./../hooks/useWindowSize";
 import { PactContext, TEST_NET_ID } from "../wallet/pact-wallet";
 import kitties from "./kitties";
 import shuffleSeed from "shuffle-seed";
@@ -15,7 +16,7 @@ export const Header = (props) => {
 
   const isSmallScreen = useWindowSize() <= 600;
   const screenStyleToAdd = isSmallScreen ? smallScreenStyle : {};
-  const screenStyle = { ...style, screenStyleToAdd };
+  const screenStyle = { ...style, ...screenStyleToAdd };
   const splitStyleToAddImg = isSmallScreen ? smallImageStyle : {};
   const splitStyleImg = { ...splitContainerStyle, ...splitStyleToAddImg };
   const {
@@ -205,19 +206,6 @@ function fetchJson(url, callback) {
     });
 }
 
-function useWindowSize() {
-  const [size, setSize] = useState(0);
-  useLayoutEffect(() => {
-    function updateSize() {
-      setSize(window.innerWidth);
-    }
-    window.addEventListener("resize", updateSize);
-    updateSize();
-    return () => window.removeEventListener("resize", updateSize);
-  }, []);
-  return size;
-}
-
 const backgroundColor = "#58B2EE";
 const style = {
   background: backgroundColor,
@@ -233,6 +221,8 @@ const style = {
 
 const smallScreenStyle = {
   justifyContent: "center",
+  paddingBottom: "30px",
+  paddingTop: "30px",
 };
 
 const splitContainerStyle = {
@@ -251,8 +241,9 @@ const normalTextStyle = {
 
 const smallImageStyle = {
   width: "100%",
-  paddingTop: "100px",
+  paddingTop: "70px",
   paddingBottom: "0px",
+  overflow: "none",
 };
 
 const smallTextStyle = {
